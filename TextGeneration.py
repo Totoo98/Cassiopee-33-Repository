@@ -15,7 +15,7 @@ from keras.utils import np_utils
 is_training = False
 is_generating = not is_training
 
-epochs = 50
+epochs = 10
 batch_size = 64
 characters_generate_count = 1000
 
@@ -76,8 +76,14 @@ model.add(Dense(y.shape[1], activation='softmax'))
 
 
 if(is_generating):
-    # Load the network wei
-    weight_filename = "weights-improvement-2.7103-02.hdf5"
+    # Load the network weights
+    weight_filename = "weights-improvement-1.6558-10.hdf5"
+    weight_filepath = src_file_path + "/weights/" + weight_filename
+    model.load_weights(weight_filepath)
+
+if(is_training):
+    # Load the network weights
+    weight_filename = "weights-improvement-1.6558-10.hdf5"
     weight_filepath = src_file_path + "/weights/" + weight_filename
     model.load_weights(weight_filepath)
 
@@ -102,7 +108,7 @@ if(is_generating):
     print("Seed:")
     seed = ''.join([int_to_characters[value] for value in pattern])
     sys.stdout.write(seed)
-    sys.stdout.write('\n')
+    sys.stdout.write('\n\nText generated:\n')
 
     output = ""
 
